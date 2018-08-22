@@ -13,7 +13,7 @@ public class User extends AuditModel {
     public void setUsername(String username){this.username = username;}
 
     @NotBlank
-    @Column(name = "name")
+    @Column(name = "full_name")
     private String name;
     public String getName(){return name;}
     public void setName(String name){this.name = name;}

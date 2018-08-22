@@ -21,10 +21,8 @@ public class ToDoController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/todos")
-    public long getTodos(Pageable pageable) {
-        return toDoRepository.findAll(pageable).getTotalElements();
-    }
+    @GetMapping("/todo")
+    public long getTodo(Pageable pageable) {return toDoRepository.findAll(pageable).getTotalElements();}
 
     @PostMapping("/user/{username}/todo")
     public ToDo createTodo(@PathVariable String username, @Valid @RequestBody ToDo toDo) {
@@ -54,7 +52,7 @@ public class ToDoController {
     @RequestMapping(value = "/user/{username}/todo", method = RequestMethod.GET)
     public List<ToDo> getToDosByUsername(@PathVariable String username) {
         if(!userRepository.existsById(username)) {
-            throw new ResourceNotFoundException("Username " + username + " not found! Cannot display all todo owned by " + username + "!");
+            throw new ResourceNotFoundException("Username " + username + " not found!");
         }
 
         return toDoRepository.findAllByUser_Username(username);

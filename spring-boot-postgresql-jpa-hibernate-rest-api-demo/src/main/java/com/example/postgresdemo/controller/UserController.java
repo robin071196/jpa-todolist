@@ -17,20 +17,20 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/users")
-    public long getUsers(Pageable pageable) {
+    @GetMapping("/user")
+    public long getUser(Pageable pageable) {
         return userRepository.findAll(pageable).getTotalElements();
     }
 
     @PostMapping("/user/register")
-    public User createUsers(@Valid @RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userRepository.save(user);
     }
 
     @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
     public List<User> getUserByUsername(@PathVariable String username) {
         if(!userRepository.existsById(username)) {
-            throw new ResourceNotFoundException("Username " + username + " not found! Cannot display user profile");
+            throw new ResourceNotFoundException("Username " + username + " not found!");
         }
 
         return userRepository.findByUsername(username);
